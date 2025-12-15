@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<AssemblyName>BetterCommand</AssemblyName>
 		<Description>Improve artifact of command experience</Description>
-		<Version>0.0.1</Version>
+		<Version>0.0.4</Version>
 		<LangVersion>latest</LangVersion>
 		<WarningsAsErrors>Nullable</WarningsAsErrors>
 	</PropertyGroup>
