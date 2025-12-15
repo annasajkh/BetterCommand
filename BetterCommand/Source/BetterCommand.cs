@@ -22,7 +22,7 @@ namespace BetterCommand.Source
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "AnnasVirtual";
         public const string PluginName = "BetterCommand";
-        public const string PluginVersion = "0.0.1";
+        public const string PluginVersion = "0.0.4";
 
         public static List<PlayerHealthData> currentlyInItemPickerPlayers = new();
 
