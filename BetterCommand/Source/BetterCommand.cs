@@ -52,17 +52,47 @@ namespace BetterCommand.Source
 
             On.RoR2.PickupPickerController.OnDisplayBegin += (On.RoR2.PickupPickerController.orig_OnDisplayBegin orig, PickupPickerController self, NetworkUIPromptController networkUIPromptController, LocalUser localUser, CameraRigController cameraRigController) =>
             {
-                new PickupPickerMessage(localUser.cachedMaster.netId, PickupPickerMessageType.Add).Send(NetworkDestination.Server);
+                if (NetworkServer.active)
+                {
+                    CharacterMaster currentParticipantMasterServer = networkUIPromptController.currentParticipantMaster;
+
+                    currentlyInItemPickerPlayers.Add(new PlayerHealthData(currentParticipantMasterServer.gameObject, currentParticipantMasterServer.GetBody().healthComponent.health));
+
+                    currentParticipantMasterServer.GetBody().AddBuff(DLC3Content.Buffs.Untargetable);
+                    currentParticipantMasterServer.GetBody().AddBuff(RoR2Content.Buffs.Immune);
+
+                    orig(self, networkUIPromptController, localUser, cameraRigController);
+                    return;
+                }
+
+                new PickupPickerMessage(networkUIPromptController.currentParticipantMaster.netId, PickupPickerMessageType.Add).Send(NetworkDestination.Server);
 
                 orig(self, networkUIPromptController, localUser, cameraRigController);
             };
 
             On.RoR2.PickupPickerController.OnDisplayEnd += (On.RoR2.PickupPickerController.orig_OnDisplayEnd orig, PickupPickerController self, NetworkUIPromptController networkUIPromptController, LocalUser localUser, CameraRigController cameraRigController) =>
             {
-                new PickupPickerMessage(localUser.cachedMaster.netId, PickupPickerMessageType.Remove).Send(NetworkDestination.Server);
+                if (NetworkServer.active)
+                {
+                    CharacterMaster currentParticipantMasterServer = networkUIPromptController.currentParticipantMaster;
+
+                    currentlyInItemPickerPlayers.RemoveAll(currentlyInItemPickerPlayer => currentlyInItemPickerPlayer.Player == currentParticipantMasterServer.gameObject);
+
+                    currentParticipantMasterServer.GetBody().RemoveBuff(DLC3Content.Buffs.Untargetable);
+                    currentParticipantMasterServer.GetBody().RemoveBuff(RoR2Content.Buffs.Immune);
+
+                    orig(self, networkUIPromptController, localUser, cameraRigController);
+                    return;
+                }
+
+                new PickupPickerMessage(networkUIPromptController.currentParticipantMaster.netId, PickupPickerMessageType.Remove).Send(NetworkDestination.Server);
 
                 orig(self, networkUIPromptController, localUser, cameraRigController);
             };
+
+#if DEBUG
+            Log.Info("Better Command is Test 1");
+#endif
 
             Log.Info("Better Command is loaded");
         }
