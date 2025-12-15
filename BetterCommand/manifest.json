@@ -1,0 +1,10 @@
+{
+  "name": "BetterCommand",
+  "version_number": "0.0.3",
+  "website_url": "https://github.com/annasajkh/BetterCommand",
+  "description": "Made you immune and untargetable when you open artifact of command menu",
+  "dependencies": [
+    "bbepis-BepInExPack-5.4.2108",
+    "RiskofThunder-R2API_Networking-1.0.4"
+  ]
+}

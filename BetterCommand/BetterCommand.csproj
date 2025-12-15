@@ -1,0 +1,74 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<Nullable>enable</Nullable>
+		<AssemblyName>BetterCommand</AssemblyName>
+		<Description>Improve artifact of command experience</Description>
+		<Version>0.0.1</Version>
+		<LangVersion>latest</LangVersion>
+		<WarningsAsErrors>Nullable</WarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<RestoreAdditionalProjectSources>
+			https://api.nuget.org/v3/index.json;
+			https://nuget.bepinex.dev/v3/index.json;
+			https://nuget.windows10ce.com/nuget/v3/index.json
+		</RestoreAdditionalProjectSources>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>embedded</DebugType>
+		<PathMap>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)'))=./</PathMap>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="BepInEx.Core" Version="5.4.21" />
+		<PackageReference Include="UnityEngine.Modules" Version="2021.3.33" IncludeAssets="compile" />
+		<PackageReference Include="R2API.Networking" Version="1.0.*" NoWarn="NU1701" />
+	</ItemGroup>
+
+	<Target Name="RemoveUnwantedCopyLocalFiles" AfterTargets="ResolveAssemblyReferences">
+		<ItemGroup>
+			<ReferenceCopyLocalPaths Remove="@(ReferenceCopyLocalPaths)" Condition="'%(Filename)' != 'BetterCommand'" />
+		</ItemGroup>
+	</Target>
+
+	<PropertyGroup>
+		<TestingAloneDirectory>D:\Gale\riskofrain2\profiles\Testing My Mod Alone\BepInEx\plugins\BetterCommand</TestingAloneDirectory>
+		<TestingWithPeopleDirectory>D:\Gale\riskofrain2\profiles\Testing My Mod With Other People\BepInEx\plugins\BetterCommand</TestingWithPeopleDirectory>
+	</PropertyGroup>
+
+	<Target Name="CopyToTestProfile" AfterTargets="PostBuildEvent">
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(TestingAloneDirectory)" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(TestingWithPeopleDirectory)" />
+	</Target>
+
+	<Target Name="RemoveUnwantedFiles" AfterTargets="Build">
+		<ItemGroup>
+			<FilesToDelete Include="$(OutputPath)*.deps.json" />
+		</ItemGroup>
+		<Delete Files="@(FilesToDelete)" />
+	</Target>
+
+	<ItemGroup>
+		<None Include="icon.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="manifest.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="LICENSE">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="README.md">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="CHANGELOG.md">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="Source\Utils\Log.cs" />
+	</ItemGroup>
+</Project>
