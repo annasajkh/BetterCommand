@@ -4,13 +4,8 @@ using BetterCommand.Source.NetworkMessages;
 using BetterCommand.Source.Utils;
 using R2API.Networking;
 using R2API.Networking.Interfaces;
-using R2API.Utils;
-using Rewired;
 using RoR2;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
 using UnityEngine.Networking;
 
 namespace BetterCommand.Source
@@ -22,7 +17,7 @@ namespace BetterCommand.Source
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "AnnasVirtual";
         public const string PluginName = "BetterCommand";
-        public const string PluginVersion = "0.0.4";
+        public const string PluginVersion = "0.0.6";
 
         public static List<PlayerHealthData> currentlyInItemPickerPlayers = new();
 
