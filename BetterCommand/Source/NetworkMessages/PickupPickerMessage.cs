@@ -3,7 +3,6 @@ using R2API.Networking.Interfaces;
 using RoR2;
 using UnityEngine;
 using UnityEngine.Networking;
-using BetterCommand.Source.DataStructures;
 
 namespace BetterCommand.Source.NetworkMessages
 {
@@ -43,39 +42,15 @@ namespace BetterCommand.Source.NetworkMessages
                 return;
             }
 
-            GameObject gameObject = Util.FindNetworkObject(characterMasterNetId);
+            GameObject playerGameObject = Util.FindNetworkObject(characterMasterNetId);
 
-            if (!gameObject)
+            if (!playerGameObject)
             {
-#if DEBUG   
-                Log.Error("Cannot apply buff because the target couldn't be found");
-#endif
+                Log.Error("Cannot find player network game object");
                 return;
             }
 
-            if (gameObject.TryGetComponent(out CharacterMaster characterMaster))
-            {
-                CharacterBody characterBody = characterMaster.GetBody();
-
-                switch (pickupPickerMessageType)
-                {
-                    case PickupPickerMessageType.Add:
-                        BetterCommand.currentlyInItemPickerPlayers.Add(new PlayerHealthData(gameObject, characterBody.healthComponent.health));
-
-                        characterBody.AddBuff(DLC3Content.Buffs.Untargetable);
-                        characterBody.AddBuff(RoR2Content.Buffs.Immune);
-                        break;
-                    case PickupPickerMessageType.Remove:
-                        BetterCommand.currentlyInItemPickerPlayers.RemoveAll(currentlyInItemPickerPlayer => currentlyInItemPickerPlayer.Player == gameObject);
-
-                        characterBody.RemoveBuff(DLC3Content.Buffs.Untargetable);
-                        characterBody.RemoveBuff(RoR2Content.Buffs.Immune);
-                        break;
-                    default:
-                        break;
-                }
-            }
-
+            Helper.ApplyBetterCommandOnServer(playerGameObject, pickupPickerMessageType);
         }
 
         public void Serialize(NetworkWriter writer)
