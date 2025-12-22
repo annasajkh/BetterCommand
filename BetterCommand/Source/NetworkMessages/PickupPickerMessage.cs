@@ -39,6 +39,7 @@ namespace BetterCommand.Source.NetworkMessages
         {
             if (!NetworkServer.active)
             {
+                Log.Error("Cannot apply the modifier because this function is not run on the server");
                 return;
             }
 
