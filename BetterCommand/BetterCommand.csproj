@@ -5,7 +5,7 @@
 		<Nullable>enable</Nullable>
 		<AssemblyName>BetterCommand</AssemblyName>
 		<Description>Made you immune and untargetable when you open artifact of command menu</Description>
-		<Version>1.0.0</Version>
+		<Version>1.0.1</Version>
 		<LangVersion>latest</LangVersion>
 		<WarningsAsErrors>Nullable</WarningsAsErrors>
 	</PropertyGroup>
@@ -38,11 +38,13 @@
 
 	<PropertyGroup>
 		<TestingAloneDirectory>D:\Gale\riskofrain2\profiles\Testing My Mod Alone\BepInEx\plugins\BetterCommand</TestingAloneDirectory>
+		<TestingWithMyModpackDirectory>D:\Gale\riskofrain2\profiles\Annas Modpack\BepInEx\plugins\BetterCommand</TestingWithMyModpackDirectory>
 		<TestingWithPeopleDirectory>D:\Gale\riskofrain2\profiles\Testing My Mod With Other People\BepInEx\plugins\BetterCommand</TestingWithPeopleDirectory>
 	</PropertyGroup>
 
 	<Target Name="CopyToTestProfile" AfterTargets="PostBuildEvent">
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(TestingAloneDirectory)" />
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(TestingWithMyModpackDirectory)" />
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(TestingWithPeopleDirectory)" />
 	</Target>
 

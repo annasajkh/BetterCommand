@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using BaseAI = RoR2.CharacterAI.BaseAI;
-using Idle = EntityStates.Idle;
 
 namespace BetterCommand.Source.Utils
 {
@@ -79,7 +78,7 @@ namespace BetterCommand.Source.Utils
                             minionCharacterMaster.GetBody().AddBuff(RoR2Content.Buffs.HealingDisabled);
                             minionCharacterMaster.GetBody().AddBuff(DLC3Content.Buffs.Untargetable);
                             minionCharacterMaster.GetBody().AddBuff(RoR2Content.Buffs.Immune);
-                            minionCharacterMaster.GetBody().AddBuff(RoR2Content.Buffs.Nullified);
+                            minionCharacterMaster.GetBody().AddBuff(RoR2Content.Buffs.Entangle);
 
                             foreach (BaseAI aiComponent in minionCharacterMaster.AiComponents)
                             {
@@ -93,6 +92,7 @@ namespace BetterCommand.Source.Utils
                         playerCharacterBody.AddBuff(RoR2Content.Buffs.HealingDisabled);
                         playerCharacterBody.AddBuff(DLC3Content.Buffs.Untargetable);
                         playerCharacterBody.AddBuff(RoR2Content.Buffs.Immune);
+                        playerCharacterBody.AddBuff(RoR2Content.Buffs.Entangle);
                         break;
 
                     case PickupPickerMessageType.Remove:
@@ -118,7 +118,7 @@ namespace BetterCommand.Source.Utils
                             minionCharacterMaster.GetBody().RemoveBuff(RoR2Content.Buffs.HealingDisabled);
                             minionCharacterMaster.GetBody().RemoveBuff(DLC3Content.Buffs.Untargetable);
                             minionCharacterMaster.GetBody().RemoveBuff(RoR2Content.Buffs.Immune);
-                            minionCharacterMaster.GetBody().RemoveBuff(RoR2Content.Buffs.Nullified);
+                            minionCharacterMaster.GetBody().RemoveBuff(RoR2Content.Buffs.Entangle);
 
                             foreach (BaseAI aiComponent in minionCharacterMaster.AiComponents)
                             {
@@ -132,6 +132,7 @@ namespace BetterCommand.Source.Utils
                         playerCharacterBody.RemoveBuff(RoR2Content.Buffs.HealingDisabled);
                         playerCharacterBody.RemoveBuff(DLC3Content.Buffs.Untargetable);
                         playerCharacterBody.RemoveBuff(RoR2Content.Buffs.Immune);
+                        playerCharacterBody.RemoveBuff(RoR2Content.Buffs.Entangle);
                         break;
                 }
             }

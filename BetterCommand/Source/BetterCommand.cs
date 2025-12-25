@@ -15,7 +15,7 @@ namespace BetterCommand.Source
         public const string PluginGUID = PluginAuthor + "." + PluginName;
         public const string PluginAuthor = "AnnasVirtual";
         public const string PluginName = "BetterCommand";
-        public const string PluginVersion = "1.0.0";
+        public const string PluginVersion = "1.0.1";
 
         public void Awake()
         {
@@ -54,7 +54,7 @@ namespace BetterCommand.Source
             };
 
 #if DEBUG
-            Log.Info("Better Command is Test 16");
+            Log.Info("Better Command is Test 21");
 #endif
 
             Log.Info("Better Command is loaded");

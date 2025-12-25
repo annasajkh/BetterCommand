@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.0.1]
+
+- Use different effect for making the minions to not move because previous effect made annoying noises on shock drone
+
 ## [1.0.0]
 
 - Make it work on your drones and turrets also
